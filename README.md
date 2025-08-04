@@ -2,7 +2,7 @@
 This repo includes the MATLAB codes for a DMC and an EPFC controller.
 
 ## DMC
-
+ 
 
 ## EPFC
 An extended PFC controller is implemented to control a nonlinear system. The exemplar system considered is a cart with a nonlinear spring attached to it, as shown in the image:
