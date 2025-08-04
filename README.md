@@ -5,7 +5,7 @@ This repo includes the MATLAB codes for a DMC and an EPFC controller.
 <!-- Add content here -->
 
 ## EPFC
-An extended PFC controller is implemented to control a nonlinear system. The exemplar system considered is a cart with a spring attached to it, as shown in the image:
+An extended PFC controller is implemented to control a nonlinear system. The exemplar system considered is a cart with a nonlinear spring attached to it, as shown in the image:
 <img width="1000" height="800" alt="cart-with-spring" src="https://github.com/user-attachments/assets/05ea10e7-072e-4275-8c02-80a70bdfcb7c" />
 
 
@@ -55,10 +55,10 @@ The functions and scripts are as follows:
     - `beta`, `Ni` and `TOL` are used when finding `D_nonlinar`. 
     - `method` determines the linearization method: 'jacobian' or 'perturbation'
     - `is_programmed_ref`: if set to true, the reference will be considered programmed, meaning that the controller is aware of the future values of the reference signal.
-    -`noise_power` power of white noise on the output
-    -`dist_amp` the amplitude of disturbance on the output. The disturbance is considered to be a pulse signal.
-    -`dist_time` the time when the disturbance is applied
-    -`dist_duration` the duration of the disturbance
+    - `noise_power` power of white noise on the output
+    - `dist_amp` the amplitude of disturbance on the output. The disturbance is considered to be a pulse signal.
+    - `dist_time` the time when the disturbance is applied
+    - `dist_duration` the duration of the disturbance
 
 - `one_input_one_output` simulates the system for one input and one output coincidence points.
 - `one_input_three_outputs` simulates the system for one input and three output coincidence points.
