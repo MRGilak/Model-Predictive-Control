@@ -2,7 +2,7 @@
 This repo includes the MATLAB codes for a DMC and an EPFC controller.
 
 ## DMC
-<!-- Add content here -->
+
 
 ## EPFC
 An extended PFC controller is implemented to control a nonlinear system. The exemplar system considered is a cart with a nonlinear spring attached to it, as shown in the image:
@@ -26,7 +26,8 @@ This change of variables allows the new system to have a one-to-one relationship
 ```matlab
 u = v;
 ```
-A very simple explanation of EPFC is included in to-be-completed.
+A very simple explanation of EPFC is included in [this file](docs/EPFC.pdf)
+.
 
 The functions and scripts are as follows:
 ### functions
@@ -34,7 +35,8 @@ The functions and scripts are as follows:
 - linearization method: set to 'perturbation' or 'jacobian'. Jacobian uses the provided Jacobian of the system (which should be provided in `linearize_dynamics`). The perturbation method uses the predictive model and applies two inputs. One where the input is kept unchanged as it is at this sample time, and one with a small change in the control input value. By dividing the change of the output in the two cases by the change of the input, a linearized model is achieved.
 - `linearize_dynamics` provides the jacobian for the 'jacobian' lineariztion method. You should set this function according to your system's dynamics.
 - `get_step_response_nonlinear` provides the outputs for a given constant input. It is used in 'perturbation' linearization technique.
-- `update_nonlinear_state` moves the nonlinear system's dynamics forward one step. A considerably smaller step size (compared to control sample time) should be considered when simulating the nonlinear system itself. The `substeps` parameter can be tuned for that (keep it at least at 10 for a realistic simulation).
+- `update_nonlinear_state` moves the nonlinear system's dynamics forward one step. You can insert your system dynamics here.
+A considerably smaller step size (compared to control sample time) should be considered when simulating the nonlinear system itself. The `substeps` parameter can be tuned for that (keep it at least at 10 for a realistic simulation).
 - `update_nonlinear_state_actual` is used when model mismatch is considered. You can skip setting up this function if your model is exact. If not, use the model at hand in `update_nonlinear_state` and in `update_nonlinear_state_actual` write the actual system model (unknown). 
 - `plot_simulation_results` and `plot_comparison_results` are used for plotting and saving the outputs. The outputs are saved in a folder called `simulation_results` in `downloads`. If no such folder exists, one will be created.
 
