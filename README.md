@@ -2,7 +2,51 @@
 This repo includes the MATLAB codes for a DMC and an EPFC controller.
 
 ## DMC
- 
+A DMC controller is implemented to control a linear system. The linear system is actually the linearized version of a nonlinear system, which as an example is considered to be a cart with a nonlinear spring, as that used for the EPFC controller in [here](#epfc). 
+A very simple explanation of DMC is included in [this file](docs/DMC.pdf).
+
+The functions and scripts are as follows:
+### DMC functions
+- `simulate_linear_system` and `simulate_nonlinear_system` simulate the systems by running the whole simulation, calling the MPC controller at each timestep to get the control input, applying the control input to the systems and moving the dynamics forward.
+- `dmc_linear` determines the control input for the linear system using the DMC logic
+- `dmc_nonlinear` is the same as `dmc_linear` with the difference that it moves the nonlinear system's dynamics forward to calculate `Ypast`.
+- `update_linear_state` moves the linear system's dynamics forward one step. You can insert your linear system dynamics here.
+- `update_nonlinear_state` moves the nonlinear system's dynamics forward one step. You can insert your nonlinear system dynamics here.
+A considerably smaller step size (compared to control sample time) should be considered when simulating the nonlinear system itself. The `substeps` parameter can be tuned for that (keep it at least at 10 for a realistic simulation).
+- `plot_simulation_results`, `plot_comparison_results`, `plot_comparison_results_for_Q` and `plot_comparison_results_for_alpha` are used for plotting the results.
+- `plot_static_gain` is used for analyzing the nonlinear system's static gain at a given point 
+
+### DMC scripts
+
+- `plot_step_response` is used to analyzing the linearized system's step response to obtain a reliable model horizon N
+- `general` runs the simulation with the set parameters and saves the results. Parameters include:
+    - `Ts` sampling time
+    - `tf` final simulation time
+    - `N` model horizon
+    - `u0_nonlinear` the nonlinear system's operating point control input
+    - `u0_linear` initial value of the linearized system's control input 
+    - `bias` and `span` used for generating the reference signal
+    - `P` prediction horizon
+    - `M` control horizon
+    - `alpha` filter coefficient for filtering the desired reference
+    - `Q` weight of each future output sample (set not as a matrix, but as a vector. This will be later used to construct a diagonal Q)
+    - `R` weight of each future input sample (set not as a matrix, but as a vector. This will be later used to construct a diagonal Q)
+    - `N_model` not actually used. Set it equal to `N`
+    - `x0` initial condition of the system
+    - `is_programmed` if set to true, the reference will be considered programmed, meaning that the controller is aware of the future values of the reference signal.
+    - `is_open_loop` if set to true, the disturbance `D` term will not be 
+    - `noise_power` power of white noise on the output (in dB)
+    - `dist_amp` the amplitude of disturbance on the output. The disturbance is considered to be a pulse signal.
+    - `dist_start_time` the time when the disturbance is applied
+- `compare_Ms` compares different values of M. 
+- `compare_Ns` compares different values of N. 
+- `compare_Ps` compares different values of P. 
+- `compare_Qs` compares different values of Q. 
+- `compare_Rs` compares different values of R.
+- `compare_Rs` compares different values of alpha. 
+- `pulse` pulse reference signal
+- `sinusoid` sinusoid reference signal
+
 
 ## EPFC
 An extended PFC controller is implemented to control a nonlinear system. The exemplar system considered is a cart with a nonlinear spring attached to it, as shown in the image:
@@ -26,11 +70,10 @@ This change of variables allows the new system to have a one-to-one relationship
 ```matlab
 u = v;
 ```
-A very simple explanation of EPFC is included in [this file](docs/EPFC.pdf)
-.
+A very simple explanation of EPFC is included in [this file](docs/EPFC.pdf).
 
 The functions and scripts are as follows:
-### functions
+### EPFC functions
 `run_simulation` runs the simulation given
 - linearization method: set to 'perturbation' or 'jacobian'. Jacobian uses the provided Jacobian of the system (which should be provided in `linearize_dynamics`). The perturbation method uses the predictive model and applies two inputs. One where the input is kept unchanged as it is at this sample time, and one with a small change in the control input value. By dividing the change of the output in the two cases by the change of the input, a linearized model is achieved.
 - `linearize_dynamics` provides the jacobian for the 'jacobian' lineariztion method. You should set this function according to your system's dynamics.
@@ -40,7 +83,7 @@ A considerably smaller step size (compared to control sample time) should be con
 - `update_nonlinear_state_actual` is used when model mismatch is considered. You can skip setting up this function if your model is exact. If not, use the model at hand in `update_nonlinear_state` and in `update_nonlinear_state_actual` write the actual system model (unknown). 
 - `plot_simulation_results` and `plot_comparison_results` are used for plotting and saving the outputs. The outputs are saved in a folder called `simulation_results` in `downloads`. If no such folder exists, one will be created.
 
-### scripts
+### EPFC scripts
 - `plot_static_gain` is used for analyzing the nonlinear system static gain and consider a change of variables if necessary
 - `main` runs the simulation with the set parameters and saves the results. Parameters include:
     - `Ts` sampling time
@@ -61,7 +104,6 @@ A considerably smaller step size (compared to control sample time) should be con
     - `dist_amp` the amplitude of disturbance on the output. The disturbance is considered to be a pulse signal.
     - `dist_time` the time when the disturbance is applied
     - `dist_duration` the duration of the disturbance
-
 - `one_input_one_output` simulates the system for one input and one output coincidence points.
 - `one_input_three_outputs` simulates the system for one input and three output coincidence points.
 - `one_input_three_outputs` simulates the system for three input and three output coincidence points.
