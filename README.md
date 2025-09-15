@@ -85,7 +85,7 @@ A considerably smaller step size (compared to control sample time) should be con
 
 ### EPFC scripts
 - [plot_static_gain](EPFC/plot_static_gain.m) is used for analyzing the nonlinear system static gain and consider a change of variables if necessary
-- [main](EPFC/main) runs the simulation with the set parameters and saves the results. Parameters include:
+- [main](EPFC/main.m) runs the simulation with the set parameters and saves the results. Parameters include:
     - `Ts` sampling time
     - `tf` final simulation time
     - `N-model` not actually used in PFC, but set it to something larger than all the `mu`s
