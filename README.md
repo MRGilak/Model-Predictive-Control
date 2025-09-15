@@ -7,19 +7,19 @@ A very simple explanation of DMC is included in [this file](docs/DMC.pdf).
 
 The functions and scripts are as follows:
 ### DMC functions
-- [simulate_linear_system](DMC/simulate_linear_system) and [simulate_nonlinear_system(DMC/simulate_nonlinear_system) simulate the systems by running the whole simulation, calling the MPC controller at each timestep to get the control input, applying the control input to the systems and moving the dynamics forward.
-- [dmc_linear](DMC/dmc_linear) determines the control input for the linear system using the DMC logic
-- [dmc_nonlinear](DMC/dmc_nonlinear) is the same as [dmc_linear](DMC/dmc_linear) with the difference that it moves the nonlinear system's dynamics forward to calculate `Ypast`.
-- [update_linear_state](DMC/update_linear_state) moves the linear system's dynamics forward one step. You can insert your linear system dynamics here.
-- [update_nonlinear_state](DMC/update_nonlinear_state) moves the nonlinear system's dynamics forward one step. You can insert your nonlinear system dynamics here.
+- [simulate_linear_system](DMC/simulate_linear_system.m) and [simulate_nonlinear_system(DMC/simulate_nonlinear_system) simulate the systems by running the whole simulation, calling the MPC controller at each timestep to get the control input, applying the control input to the systems and moving the dynamics forward.
+- [dmc_linear](DMC/dmc_linear.m) determines the control input for the linear system using the DMC logic
+- [dmc_nonlinear](DMC/dmc_nonlinear.m) is the same as [dmc_linear](DMC/dmc_linear.m) with the difference that it moves the nonlinear system's dynamics forward to calculate `Ypast`.
+- [update_linear_state](DMC/update_linear_state.m) moves the linear system's dynamics forward one step. You can insert your linear system dynamics here.
+- [update_nonlinear_state](DMC/update_nonlinear_state.m) moves the nonlinear system's dynamics forward one step. You can insert your nonlinear system dynamics here.
 A considerably smaller step size (compared to control sample time) should be considered when simulating the nonlinear system itself. The `substeps` parameter can be tuned for that (keep it at least at 10 for a realistic simulation).
-- [plot_simulation_results](DMC/plot_simulation_results), [plot_comparison_results](DMC/plot_comparison_results), [plot_comparison_results_for_Q](DMC/plot_comparison_results_for_Q) and [plot_comparison_results_for_alpha](DMC/plot_comparison_results_for_alpha) are used for plotting the results.
-- [plot_static_gain](DMC/plot_static_gain) is used for analyzing the nonlinear system's static gain at a given point 
+- [plot_simulation_results](DMC/plot_simulation_results.m), [plot_comparison_results](DMC/plot_comparison_results.m), [plot_comparison_results_for_Q](DMC/plot_comparison_results_for_Q.m) and [plot_comparison_results_for_alpha](DMC/plot_comparison_results_for_alpha.m) are used for plotting the results.
+- [plot_static_gain](DMC/plot_static_gain.m) is used for analyzing the nonlinear system's static gain at a given point 
 
 ### DMC scripts
 
-- [plot_step_response](DMC/plot_step_response) is used to analyzing the linearized system's step response to obtain a reliable model horizon N
-- [general](DMC/general) runs the simulation with the set parameters and saves the results. Parameters include:
+- [plot_step_response](DMC/plot_step_response.m) is used to analyzing the linearized system's step response to obtain a reliable model horizon N
+- [general](DMC/general.m) runs the simulation with the set parameters and saves the results. Parameters include:
     - `Ts` sampling time
     - `tf` final simulation time
     - `N` model horizon
@@ -38,14 +38,14 @@ A considerably smaller step size (compared to control sample time) should be con
     - `noise_power` power of white noise on the output (in dB)
     - `dist_amp` the amplitude of disturbance on the output. The disturbance is considered to be a pulse signal.
     - `dist_start_time` the time when the disturbance is applied
-- [compare_Ms](DMC/compare_Ms) compares different values of M. 
-- [compare_Ms](DMC/compare_Ns) compares different values of N. 
-- [compare_Ms](DMC/compare_Ps) compares different values of P. 
-- [compare_Ms](DMC/compare_Qs) compares different values of Q. 
-- [compare_Ms](DMC/compare_Rs) compares different values of R.
-- [compare_alphas](DMC/compare_alphas) compares different values of alpha. 
+- [compare_Ms](DMC/compare_Ms.m) compares different values of M. 
+- [compare_Ms](DMC/compare_Ns.m) compares different values of N. 
+- [compare_Ms](DMC/compare_Ps.m) compares different values of P. 
+- [compare_Ms](DMC/compare_Qs.m) compares different values of Q. 
+- [compare_Ms](DMC/compare_Rs.m) compares different values of R.
+- [compare_alphas](DMC/compare_alphas.m) compares different values of alpha. 
 - [pulse](DMC/pulse0 pulse reference signal
-- [sinusoid](DMC/) sinusoid reference signal
+- [sinusoid](DMC/sinusoid.m) sinusoid reference signal
 
 
 ## EPFC
