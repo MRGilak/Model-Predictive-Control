@@ -39,10 +39,10 @@ A considerably smaller step size (compared to control sample time) should be con
     - `dist_amp` the amplitude of disturbance on the output. The disturbance is considered to be a pulse signal.
     - `dist_start_time` the time when the disturbance is applied
 - [compare_Ms](DMC/compare_Ms.m) compares different values of M. 
-- [compare_Ms](DMC/compare_Ns.m) compares different values of N. 
-- [compare_Ms](DMC/compare_Ps.m) compares different values of P. 
-- [compare_Ms](DMC/compare_Qs.m) compares different values of Q. 
-- [compare_Ms](DMC/compare_Rs.m) compares different values of R.
+- [compare_Ns](DMC/compare_Ns.m) compares different values of N. 
+- [compare_Ps](DMC/compare_Ps.m) compares different values of P. 
+- [compare_Qs](DMC/compare_Qs.m) compares different values of Q. 
+- [compare_Rs](DMC/compare_Rs.m) compares different values of R.
 - [compare_alphas](DMC/compare_alphas.m) compares different values of alpha. 
 - [pulse](DMC/pulse0 pulse reference signal
 - [sinusoid](DMC/sinusoid.m) sinusoid reference signal
@@ -74,17 +74,17 @@ A very simple explanation of EPFC is included in [this file](docs/EPFC.pdf).
 
 The functions and scripts are as follows:
 ### EPFC functions
-- [run_simulation](EPFC/run_simulation) runs the simulation given
-linearization method: set to 'perturbation' or 'jacobian'. Jacobian uses the provided Jacobian of the system (which should be provided in `linearize_dynamics`). The perturbation method uses the predictive model and applies two inputs. One where the input is kept unchanged as it is at this sample time, and one with a small change in the control input value. By dividing the change of the output in the two cases by the change of the input, a linearized model is achieved.
-- [linearize_dynamics](EPFC/linearize_dynamics) provides the jacobian for the 'jacobian' lineariztion method. You should set this function according to your system's dynamics.
-- [get_step_response_nonlinear](EPFC/get_step_response_nonlinear) provides the outputs for a given constant input. It is used in 'perturbation' linearization technique.
-- [update_nonlinear_state](EPFC/update_nonlinear_state) moves the nonlinear system's dynamics forward one step. You can insert your system dynamics here.
+- [run_simulation](EPFC/run_simulation.m) runs the simulation given
+linearization method: set to 'perturbation' or 'jacobian'. Jacobian uses the provided Jacobian of the system (which should be provided in [linearize_dynamics](EPFC/linearize_dynamics.m)). The perturbation method uses the predictive model and applies two inputs. One where the input is kept unchanged as it is at this sample time, and one with a small change in the control input value. By dividing the change of the output in the two cases by the change of the input, a linearized model is achieved.
+- [linearize_dynamics](EPFC/linearize_dynamics.m) provides the jacobian for the 'jacobian' lineariztion method. You should set this function according to your system's dynamics.
+- [get_step_response_nonlinear](EPFC/get_step_response_nonlinear.m) provides the outputs for a given constant input. It is used in 'perturbation' linearization technique.
+- [update_nonlinear_state](EPFC/update_nonlinear_state.m) moves the nonlinear system's dynamics forward one step. You can insert your system dynamics here.
 A considerably smaller step size (compared to control sample time) should be considered when simulating the nonlinear system itself. The `substeps` parameter can be tuned for that (keep it at least at 10 for a realistic simulation).
-- [update_nonlinear_state_actual](EPFC/update_nonlinear_state_actual) is used when model mismatch is considered. You can skip setting up this function if your model is exact. If not, use the model at hand in [update_nonlinear_state](EPFC/update_nonlinear_state) and in [update_nonlinear_state_actual](EPFC/update_nonlinear_state_actual) write the actual system model (unknown). 
-- [plot_simulation_results](EPFC/plot_simulation_results) and [plot_comparison_results](EPFC/plot_comparison_results) are used for plotting and saving the outputs. The outputs are saved in a folder called `simulation_results` in `downloads`. If no such folder exists, one will be created.
+- [update_nonlinear_state_actual](EPFC/update_nonlinear_state_actual.m) is used when model mismatch is considered. You can skip setting up this function if your model is exact. If not, use the model at hand in [update_nonlinear_state](EPFC/update_nonlinear_state.m) and in [update_nonlinear_state_actual](EPFC/update_nonlinear_state_actual.m) write the actual system model (unknown). 
+- [plot_simulation_results](EPFC/plot_simulation_results.m) and [plot_comparison_results](EPFC/plot_comparison_results.m) are used for plotting and saving the outputs. The outputs are saved in a folder called `simulation_results` in `downloads`. If no such folder exists, one will be created.
 
 ### EPFC scripts
-- [plot_static_gain](EPFC/plot_static_gain) is used for analyzing the nonlinear system static gain and consider a change of variables if necessary
+- [plot_static_gain](EPFC/plot_static_gain.m) is used for analyzing the nonlinear system static gain and consider a change of variables if necessary
 - [main](EPFC/main) runs the simulation with the set parameters and saves the results. Parameters include:
     - `Ts` sampling time
     - `tf` final simulation time
@@ -104,21 +104,21 @@ A considerably smaller step size (compared to control sample time) should be con
     - `dist_amp` the amplitude of disturbance on the output. The disturbance is considered to be a pulse signal.
     - `dist_time` the time when the disturbance is applied
     - `dist_duration` the duration of the disturbance
-- [one_input_one_output](EPFC/one_input_one_output) simulates the system for one input and one output coincidence points.
-- [one_input_three_outputs](EPFC/one_input_three_outputs) simulates the system for one input and three output coincidence points.
-- [one_input_three_outputs](EPFC/one_input_three_outputs) simulates the system for three input and three output coincidence points.
-- [compare_coincidence_points](EPFC/compare_coincidence_points) compares the three cases above.
-- [compare_input_coincidence_points](EPFC/compare_input_coincidence_points) compare different sets of input coincidence points.
-- [compare_output_coincidence_points](EPFC/compare_output_coincidence_points) compare different sets of output coincidence points.
-- [compare_constrained_vs_unconstrained](EPFC/compare_constrained_vs_unconstrained) compares the controller performance in presence and absence of input constraints
-- [compare_linearization_method](EPFC/compare_linearization_method) compares 'perturbation' and 'jacobian' linearization methods.
-- [compare_q_values](EPFC/compare_q_values) compares different values of q. 
-- [compare_r_values](EPFC/compare_r_values) compares different values of r.
-- [compare-psi_values](EPFC/compare-psi_values) compares different values of psi.
-- [compare_nominal_vs-uncertainty](EPFC/compare_nominal_vs-uncertainty) compares the controller performance in presence and absence of uncertainty in the model.
-- [compare_programmed](EPFC/compare_programmed) compares programmed vs unprogrammed reference signal.
-- [noise_and_disturbance](EPFC/noise_and_disturbance) is just [main](EPFC/main) with more noise and disturbance to see their effects.
-- [initial_condition](EPFC/initial_condition) is just [main](EPFC/main) with different initial conditions to see their effects.
+- [one_input_one_output](EPFC/one_input_one_output.m) simulates the system for one input and one output coincidence points.
+- [one_input_three_outputs](EPFC/one_input_three_outputs.m) simulates the system for one input and three output coincidence points.
+- [one_input_three_outputs](EPFC/one_input_three_outputs.m) simulates the system for three input and three output coincidence points.
+- [compare_coincidence_points](EPFC/compare_coincidence_points.m) compares the three cases above.
+- [compare_input_coincidence_points](EPFC/compare_input_coincidence_points.m) compare different sets of input coincidence points.
+- [compare_output_coincidence_points](EPFC/compare_output_coincidence_points.m) compare different sets of output coincidence points.
+- [compare_constrained_vs_unconstrained](EPFC/compare_constrained_vs_unconstrained.m) compares the controller performance in presence and absence of input constraints
+- [compare_linearization_method](EPFC/compare_linearization_method.m) compares 'perturbation' and 'jacobian' linearization methods.
+- [compare_q_values](EPFC/compare_q_values.m) compares different values of q. 
+- [compare_r_values](EPFC/compare_r_values.m) compares different values of r.
+- [compare-psi_values](EPFC/compare-psi_values.m) compares different values of psi.
+- [compare_nominal_vs-uncertainty](EPFC/compare_nominal_vs-uncertainty.m) compares the controller performance in presence and absence of uncertainty in the model.
+- [compare_programmed](EPFC/compare_programmed.m) compares programmed vs unprogrammed reference signal.
+- [noise_and_disturbance](EPFC/noise_and_disturbance.m) is just [main](EPFC/main.m) with more noise and disturbance to see their effects.
+- [initial_condition](EPFC/initial_condition.m) is just [main](EPFC/main.m) with different initial conditions to see their effects.
 
 
 
