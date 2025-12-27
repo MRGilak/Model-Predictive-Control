@@ -62,9 +62,11 @@ An extended PFC controller is implemented to control a nonlinear system. The exe
 The system state space representation is as follows:
 
 $$
-    \dot{x}_1 = x_2 \\
-    \dot{x}_2 = -0.33 e^{-x_1} x_1 - 1.1 x_2 + u
-    y = x_1
+    \begin{align}
+        \dot{x}_1 = x_2 \\
+        \dot{x}_2 = -0.33 e^{-x_1} x_1 - 1.1 x_2 + u
+        y = x_1
+    \end{align}
 $$
 
 Any other system can be used instead. It's simply a matter of system definition in one function, which will be shown later.
