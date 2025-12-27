@@ -121,11 +121,11 @@ A considerably smaller step size (compared to control sample time) should be con
 - [compare_input_coincidence_points](EPFC/compare_input_coincidence_points.m) compare different sets of input coincidence points.
 - [compare_output_coincidence_points](EPFC/compare_output_coincidence_points.m) compare different sets of output coincidence points.
 - [compare_constrained_vs_unconstrained](EPFC/compare_constrained_vs_unconstrained.m) compares the controller performance in presence and absence of input constraints
-- [compare_linearization_method](EPFC/compare_linearization_method.m) compares 'perturbation' and 'jacobian' linearization methods.
+- [compare_linearization_methods](EPFC/compare_linearization_methods.m) compares 'perturbation' and 'jacobian' linearization methods.
 - [compare_q_values](EPFC/compare_q_values.m) compares different values of q. 
 - [compare_r_values](EPFC/compare_r_values.m) compares different values of r.
-- [compare-psi_values](EPFC/compare-psi_values.m) compares different values of psi.
-- [compare_nominal_vs-uncertainty](EPFC/compare_nominal_vs-uncertainty.m) compares the controller performance in presence and absence of uncertainty in the model.
+- [compare_psi_values](EPFC/compare_psi_values.m) compares different values of psi.
+- [compare_nominal_vs_uncertainty](EPFC/compare_nominal_vs_uncertainty.m) compares the controller performance in presence and absence of uncertainty in the model.
 - [compare_programmed](EPFC/compare_programmed.m) compares programmed vs unprogrammed reference signal.
 - [noise_and_disturbance](EPFC/noise_and_disturbance.m) is just [main](EPFC/main.m) with more noise and disturbance to see their effects.
 - [initial_condition](EPFC/initial_condition.m) is just [main](EPFC/main.m) with different initial conditions to see their effects.
