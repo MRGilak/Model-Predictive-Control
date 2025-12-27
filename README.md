@@ -50,14 +50,15 @@ A considerably smaller step size (compared to control sample time) should be con
 
 ## EPFC
 An extended PFC controller is implemented to control a nonlinear system. The exemplar system considered is a cart with a nonlinear spring attached to it, as shown in the image:
-<img width="1000" height="800" alt="cart-with-spring" src="https://github.com/user-attachments/assets/05ea10e7-072e-4275-8c02-80a70bdfcb7c" />
+<img width="500" height="400" alt="cart-with-spring" src="https://github.com/user-attachments/assets/05ea10e7-072e-4275-8c02-80a70bdfcb7c" />
 
 
 The system state space representation is as follows:
+
 $$
-dot{x}_1 = x2
-\dot{x}_2 = -0.33 e^{-x_1} x_1 - 1.1 x_2 + u
-y = x_1
+    \dot{x}_1 = x_2
+    \dot{x}_2 = -0.33 e^{-x_1} x_1 - 1.1 x_2 + u
+    y = x_1
 $$
 
 Any other system can be used instead. It's simply a matter of system definition in one function, which will be shown later.
