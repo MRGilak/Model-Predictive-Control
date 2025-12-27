@@ -71,9 +71,10 @@ $$
 
 Any other system can be used instead. It's simply a matter of system definition in one function, which will be shown later.
 A change of variables is considered as:
-```
-v = u + x1
-```
+
+$$
+    v = u + x_1
+$$
 
 This change of variables allows the new system to have a one-to-one relationship between `v` and `y`. If a system does not need a change of variables, line 162 of `run_simulation` can simply be changed to:
 ```matlab
