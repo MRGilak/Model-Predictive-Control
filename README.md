@@ -1,5 +1,9 @@
 # Model-Predictive-Control
-This repo includes the MATLAB codes for a DMC and an EPFC controller.
+This repository includes the MATLAB codes for a DMC and an EPFC controller. These two are basic types of Model-Predictive Control (MPC). The code can handle all sorts of model horizon, prediction horizon, control horizon, or gain tuning, along with mismatched model, control input limits, etc. 
+
+Here is an example of the reference tracking and control input:
+
+<img width="800" height="300" alt="cart-with-spring" src="assets/images/main_output.png" />
 
 ## DMC
 A DMC controller is implemented to control a linear system. The linear system is actually the linearized version of a nonlinear system, which as an example is considered to be a cart with a nonlinear spring, as that used for the EPFC controller in [here](#epfc). 
@@ -50,8 +54,8 @@ A considerably smaller step size (compared to control sample time) should be con
 
 ## EPFC
 An extended PFC controller is implemented to control a nonlinear system. The exemplar system considered is a cart with a nonlinear spring attached to it, as shown in the image:
-<img width="1000" height="800" alt="cart-with-spring" src="https://github.com/user-attachments/assets/05ea10e7-072e-4275-8c02-80a70bdfcb7c" />
 
+<img width="500" height="400" alt="cart-with-spring" src="assets/images/cart-with-spring.png" />
 
 The system state space representation is as follows:
 ```
